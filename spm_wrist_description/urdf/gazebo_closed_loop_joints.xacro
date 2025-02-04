@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="closedloop_joints">
+
+    <gazebo>
+      <joint name="Platform_Joint2" type="revolute">
+        <pose relative_to="PlatformSupportLink2">0.03879 0.03167 0.01419 0 ${-PI/3} 0</pose>
+        <parent>Platform</parent>
+        <child>PlatformSupportLink2</child>
+        <axis>
+          <xyz> 0 0 1</xyz>
+        </axis>
+        <limit>
+          <lower>${-PI}</lower>
+          <upper>${PI}</upper>
+          <effort>100.0</effort>
+          <velocity>10.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>10.0</damping>
+          <friction>1.0</friction>
+        </dynamics>
+      </joint>
+
+    <joint name="Platform_Joint3" type="revolute">
+        <pose relative_to="PlatformSupportLink3">-0.007013 0.03142 -0.04085 0 ${PI/3} 0</pose>
+        <parent>Platform</parent>
+        <child>PlatformSupportLink3</child>
+        <axis>
+          <xyz> 0 0 1</xyz>
+        </axis>
+        <limit>
+          <lower>${-PI}</lower>
+          <upper>${PI}</upper>
+          <effort>100.0</effort>
+          <velocity>10.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>10.0</damping>
+          <friction>1.0</friction>
+        </dynamics>
+      </joint>
+    </gazebo>
+</robot>

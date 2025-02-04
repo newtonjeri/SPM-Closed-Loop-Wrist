@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="spm_wrist">
+<xacro:property name="PI" value="3.14159265"/>
+
+    <xacro:include filename="$(find spm_wrist_description)/urdf/materials.xacro" />
+    <xacro:include filename="$(find spm_wrist_description)/urdf/spm.xacro"/>
+    <xacro:include filename="$(find spm_wrist_description)/urdf/gazebo_closed_loop_joints.xacro"/>
+
+    <link name="world"/>
+    
+    <joint name="world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.20" rpy="${PI/2} 0.0 0.0"/>
+    </joint>
+    
+    
+</robot>
