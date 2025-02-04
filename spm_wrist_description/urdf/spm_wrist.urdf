@@ -669,6 +669,6 @@
   <joint name="world_joint" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
-    <origin rpy="1.570796325 0.0 0.0" xyz="0.0 0.0 0.20"/>
+    <origin rpy="1.570796325 0.0 0.0" xyz="0.0 0.0 0.0"/>
   </joint>
 </robot>

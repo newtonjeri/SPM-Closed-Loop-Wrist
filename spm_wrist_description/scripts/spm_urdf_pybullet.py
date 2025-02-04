@@ -6,7 +6,7 @@ import pybullet_data
 import time
 
 # Load the SPM model from the provided URDF file
-urdf_path = "/home/newtonjeri/ros2_work_ws/Closed-Loop-Wrist-Robot-Arm/src/spm_wrist_description/urdf/spm_wrist.urdf"
+urdf_path = "spm_wrist_description/urdf/spm_wrist.urdf"
 
 # Connect to PyBullet
 p.connect(p.GUI)
@@ -32,18 +32,20 @@ closed_loop_joints = [
         "child": "PlatformSupportLink2",
         "axis": [0, 0, 1],
         "parent_frame_position": [0.03879, 0.03167, 0.01419],
+        "parent_fram_orientation":  p.getQuaternionFromEuler([0.0, -np.pi/3, 0.0]),
         "child_frame_position": [0, 0, 0],
+        # "child_frame_orientation": [0.0, 0.0, 0.0, 1.0],
         "joint_range": [-np.pi, np.pi],
     },
-    {
-        "name": "Platform_Joint3",
-        "parent": "Platform",
-        "child": "PlatformSupportLink3",
-        "axis": [0, 0, 1],
-        "parent_frame_position": [-0.007013, 0.03142, -0.04085],
-        "child_frame_position": [0, 0, 0],
-        "joint_range": [-np.pi, np.pi],
-    },
+    # {
+    #     "name": "Platform_Joint3",
+    #     "parent": "Platform",
+    #     "child": "PlatformSupportLink3",
+    #     "axis": [0, 0, 1],
+    #     "parent_frame_position": [-0.007013, 0.03142, -0.04085],
+    #     "child_frame_position": [0, 0, 0],
+    #     "joint_range": [-np.pi, np.pi],
+    # },
 ]
 
 # Add constraints for closed-loop joints
@@ -60,14 +62,16 @@ for joint_info in closed_loop_joints:
         jointType=p.JOINT_POINT2POINT,
         jointAxis=joint_info["axis"],
         parentFramePosition=joint_info["parent_frame_position"],
+        # parentFrameOrientation=joint_info["parent_frame_orientation"],
         childFramePosition=joint_info["child_frame_position"],
+        # jointChildFrameOrientation=joint_info["child_frame_orientation"],
     )
 
     # Set joint limits (optional)
     p.changeConstraint(constraint_id, maxForce=100)
 
 # Simulation loop
-for step in range(300):
+for step in range(500):
     focus_position, _ = p.getBasePositionAndOrientation(spm_id)
     # p.resetDebugVisualizerCamera(cameraDistance=3, cameraYaw=0, cameraPitch=40, cameraTargetPosition=focus_position)
     p.stepSimulation()
